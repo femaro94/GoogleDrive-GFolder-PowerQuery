@@ -27,13 +27,15 @@ Ao mesmo tempo, o projeto foi documentado com honestidade técnica. Esta funçã
 
 | Seção | Objetivo |
 |---|---|
-| [Funções incluídas](#-funções-incluídas) | Entender as duas versões publicadas |
-| [Formatos suportados](#-formatos-suportados) | Ver quais extensões a função tenta interpretar |
-| [Estrutura de retorno](#-estrutura-de-retorno) | Entender as colunas devolvidas pela função |
-| [Limitações essenciais](#-limitações-técnicas-essenciais) | Saber onde a solução funciona e onde não funciona |
-| [Atualização no Power BI Service](#-atualização-automática-no-power-bi-service) | Ver a situação real de refresh no serviço |
+| [Funções incluídas](#funcoes-incluidas) | Entender as duas versões publicadas |
+| [Formatos suportados](#formatos-suportados) | Ver quais extensões a função tenta interpretar |
+| [Estrutura de retorno](#estrutura-de-retorno) | Entender as colunas devolvidas pela função |
+| [Limitações essenciais](#limitacoes-essenciais) | Saber onde a solução funciona e onde não funciona |
+| [Atualização no Power BI Service](#atualizacao-power-bi-service) | Ver a situação real de refresh no serviço |
 | [Compatibilidade e limitações](./docs/COMPATIBILIDADE_E_LIMITACOES.md) | Ler a análise complementar do projeto |
 | [Guia de uso](./docs/GUIA_DE_USO.md) | Instalar e usar no Power BI e no Excel |
+
+<a id="funcoes-incluidas"></a>
 
 ## 📦 Funções incluídas
 
@@ -53,6 +55,8 @@ A função recebe dois parâmetros: a URL da pasta do Google Drive e, opcionalme
 Primeiro, a função usa `Web.BrowserContents(...)` para ler o HTML da pasta pública do Google Drive. Depois, divide esse HTML em fragmentos com base em ocorrências de `data-id=""`, que funcionam como ponto de apoio para capturar os IDs dos arquivos. Em seguida, extrai o nome bruto do item via `aria-label`, classifica o item como arquivo, pasta ou item Google, infere a extensão real, limpa o nome do arquivo, remove o que não interessa e cria um link de download compatível com o tipo encontrado.
 
 Na etapa seguinte, a função tenta interpretar o conteúdo com base na extensão. Se o arquivo for Excel, usa `Excel.Workbook(...)`; se for CSV ou TSV, usa `Csv.Document(...)`; se for TXT, tenta primeiro leitura tabular e, em caso de falha, leitura por linhas; se for JSON, XML, PDF ou Parquet, aciona as funções específicas do Power Query para cada formato. Nas versões finais, o processo ainda foi enriquecido com **resiliência operacional**, pois a função passa a retornar colunas de **Status** e **Erro**, o que facilita auditoria, depuração e tratamento de falhas por arquivo.
+
+<a id="formatos-suportados"></a>
 
 ## 🧩 Formatos suportados
 
@@ -90,6 +94,8 @@ Na versão para **Excel**, o comportamento é o mesmo, com uma única exceção:
 
 Essa distinção é importante porque `Parquet.Document(...)` nem sempre está disponível no Power Query do Excel.
 
+<a id="estrutura-de-retorno"></a>
+
 ## 🧱 Estrutura de retorno
 
 As versões finais retornam uma tabela com sete colunas principais:
@@ -107,6 +113,8 @@ As versões finais retornam uma tabela com sete colunas principais:
 Esse desenho transforma a função em algo mais robusto do que uma simples listagem de links. Ela passa a atuar também como um mecanismo de **ingestão com log de processamento**, o que é extremamente valioso em cenários reais de ETL, automação e análise de dados.
 
 ![Compatibilidade e Limitações](./assets/img/gfolder-compatibilidade.png)
+
+<a id="limitacoes-essenciais"></a>
 
 ## 🔒 Limitações técnicas essenciais
 
@@ -150,6 +158,8 @@ O arquivo `samples/Gfolder.xlsx` confirma, de forma prática, o uso real da vers
 Além disso, a saída materializada observada no arquivo mostra uma tabela com as colunas **Nome do Arquivo**, **Tipo**, **Extensão**, **Link de Download**, **Conteúdo**, **Status** e **Erro**, exatamente como previsto no código. Os registros visíveis do exemplo retornam extensões como **xlsx**, **xls**, **pdf**, **csv** e **txt**, com **Status = OK** e **Erro em branco**, o que comprova o bom funcionamento da versão para Excel.
 
 O arquivo `samples/Gfolder.pbix` confirma a existência de um projeto Power BI utilizado como ambiente de validação da solução. A inspeção estrutural do PBIX mostra os componentes típicos do formato, incluindo `Report/Layout`, `Settings`, `Metadata` e `DataModel`, o que confirma o papel do arquivo como **artefato de teste da versão Power BI**.
+
+<a id="atualizacao-power-bi-service"></a>
 
 ## ☁️ Atualização automática no Power BI Service
 
