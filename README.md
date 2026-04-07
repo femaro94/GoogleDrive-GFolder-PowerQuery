@@ -4,11 +4,10 @@
 
 ![Status](https://img.shields.io/badge/status-ativo-success)
 
-<p align="center">
-  <strong><span style="color:#58a6ff;">Power Query</span></strong> + <strong><span style="color:#f2cc60;">Google Drive</span></strong> + <strong><span style="color:#3fb950;">ingestão online</span></strong> + <strong><span style="color:#d2a8ff;">linguagem M</span></strong>
-</p>
+**Power Query** + **Google Drive** + **ingestão online** + **linguagem M**
 
-<hr/>
+---
+
 ![Power BI](https://img.shields.io/badge/Power%20BI-suporta%20Parquet-F2C811?logo=powerbi&logoColor=000)
 ![Excel](https://img.shields.io/badge/Excel-sem%20Parquet-217346?logo=microsoftexcel&logoColor=fff)
 ![Power Query](https://img.shields.io/badge/Power%20Query-linguagem%20M-6B46C1)
@@ -42,8 +41,8 @@ As duas versões finais deste projeto são as seguintes:
 
 | Arquivo | Ambiente-alvo | Diferença principal |
 |---|---|---|
-| `04-Fn Gdrive(Fernando-IA)V3.txt` | **Power BI Desktop** | Suporta leitura de arquivos **Parquet** além dos demais formatos. |
-| `04-Fn Gdrive(Fernando-IA)V3-Excel.txt` | **Excel / Power Query do Excel** | Não usa `Parquet.Document`, para preservar compatibilidade com o Excel. |
+| `FnGdrive(Fernando)V3.txt` | **Power BI Desktop** | Suporta leitura de arquivos **Parquet** além dos demais formatos. |
+| `FnGdrive(Fernando)V3-Excel.txt` | **Excel / Power Query do Excel** | Não usa `Parquet.Document`, para preservar compatibilidade com o Excel. |
 
 A única diferença funcional entre elas está no tratamento do formato **Parquet**. Todo o restante da arquitetura, da lógica de descoberta dos arquivos e do formato de retorno permanece essencialmente igual.
 
@@ -132,7 +131,7 @@ Os testes informados para a função mostram que ela aceita tanto a URL da pasta
 
 ## 🖥️ Análise da função para Power BI
 
-A versão `04-Fn Gdrive(Fernando-IA)V3.txt` é a edição mais completa da solução. Ela inclui suporte a `Parquet.Document(...)`, além de um fluxo resiliente de leitura baseado em tentativas. O ponto mais valioso da arquitetura está no encapsulamento da leitura em um registro com `Conteúdo`, `Status` e `Erro`, o que transforma a função em um pequeno motor de ingestão supervisionada.
+A versão `FnGdrive(Fernando)V3.txt` é a edição mais completa da solução. Ela inclui suporte a `Parquet.Document(...)`, além de um fluxo resiliente de leitura baseado em tentativas. O ponto mais valioso da arquitetura está no encapsulamento da leitura em um registro com `Conteúdo`, `Status` e `Erro`, o que transforma a função em um pequeno motor de ingestão supervisionada.
 
 Do ponto de vista arquitetural, essa versão combina três camadas de inteligência. A primeira é a camada de **descoberta de arquivos**, que entende a página do Google Drive. A segunda é a camada de **normalização**, responsável por classificar o tipo do item, deduzir extensão e construir o link final. A terceira é a camada de **interpretação**, que escolhe a função de leitura correta para cada formato.
 
@@ -140,13 +139,13 @@ Para **Power BI Desktop**, essa é a versão recomendada sempre que houver inter
 
 ## 📗 Análise da função para Excel
 
-A versão `04-Fn Gdrive(Fernando-IA)V3-Excel.txt` preserva praticamente toda a engenharia da versão para Power BI, porém remove o tratamento de Parquet. Essa decisão é tecnicamente acertada, porque prioriza compatibilidade real de execução dentro do Excel.
+A versão `FnGdrive(Fernando)V3-Excel.txt` preserva praticamente toda a engenharia da versão para Power BI, porém remove o tratamento de Parquet. Essa decisão é tecnicamente acertada, porque prioriza compatibilidade real de execução dentro do Excel.
 
 Em vez de manter uma função formalmente mais completa, mas potencialmente instável no Excel, esta versão assume uma postura mais robusta: restringe o conjunto de formatos àquilo que o ambiente do Excel tende a suportar com segurança. Isso deixa explícito que não se trata de uma versão inferior, mas de uma versão **adaptada ao runtime do Excel**.
 
 ## 🧪 Arquivos de amostra do repositório
 
-O arquivo `samples/Gfolder.xlsx` confirma, de forma prática, o uso real da versão voltada para Excel. A análise interna do workbook mostra duas conexões de consulta, uma vinculada à função `Fn Gdrive(Fernando-IA)V3-Excel` e outra a uma consulta de teste chamada `Teste Fn Gdrive(Fernando-IA)V3-Excel`. A pasta de trabalho contém uma planilha visível chamada **Função Invocada**, que materializa o resultado final da execução.
+O arquivo `samples/Gfolder.xlsx` confirma, de forma prática, o uso real da versão voltada para Excel. A análise interna do workbook mostrou conexões de consulta ligadas à função `FnGdrive(Fernando)V3-Excel` e a uma consulta de resultado materializada em uma planilha visível chamada **Função Invocada**, que contém a saída final da execução.
 
 Além disso, a saída materializada observada no arquivo mostra uma tabela com as colunas **Nome do Arquivo**, **Tipo**, **Extensão**, **Link de Download**, **Conteúdo**, **Status** e **Erro**, exatamente como previsto no código. Os registros visíveis do exemplo retornam extensões como **xlsx**, **xls**, **pdf**, **csv** e **txt**, com **Status = OK** e **Erro em branco**, o que comprova o bom funcionamento da versão para Excel.
 
@@ -182,7 +181,7 @@ A função pode ser invocada sem filtro ou com filtro de extensão.
 
 ```powerquery
 let
-    Fonte = #"Fn Gdrive(Fernando-IA)V3"(
+    Fonte = #"FnGdrive(Fernando)V3"(
         "https://drive.google.com/drive/folders/1W2hryU6rf3a3BbafLC5Jm6w8g0j7MoY5"
     )
 in
@@ -191,7 +190,7 @@ in
 
 ```powerquery
 let
-    Fonte = #"Fn Gdrive(Fernando-IA)V3"(
+    Fonte = #"FnGdrive(Fernando)V3"(
         "https://drive.google.com/drive/folders/1W2hryU6rf3a3BbafLC5Jm6w8g0j7MoY5?usp=drive_link",
         "pdf"
     )
@@ -199,7 +198,7 @@ in
     Fonte
 ```
 
-No Excel, basta trocar o nome da função pela versão `Fn Gdrive(Fernando-IA)V3-Excel`.
+No Excel, basta trocar o nome da função pela versão `FnGdrive(Fernando)V3-Excel`.
 
 ## 🗂️ Estrutura do repositório
 
@@ -208,8 +207,10 @@ No Excel, basta trocar o nome da função pela versão `Fn Gdrive(Fernando-IA)V3
 | Caminho | Conteúdo |
 |---|---|
 | `/README.md` | Apresentação geral do projeto, diferenças entre versões, limitações e exemplos. |
-| `/power-bi/04-Fn Gdrive(Fernando-IA)V3.txt` | Função para Power BI. |
-| `/excel/04-Fn Gdrive(Fernando-IA)V3-Excel.txt` | Função para Excel. |
+| `/power-bi/FnGdrive(Fernando)V3.txt` | Função para Power BI. |
+| `/excel/FnGdrive(Fernando)V3-Excel.txt` | Função para Excel. |
+| `/code/FnGdrive(Fernando)V3.pq` | Visualização formatada do código da função para Power BI no GitHub. |
+| `/code/FnGdrive(Fernando)V3-Excel.pq` | Visualização formatada do código da função para Excel no GitHub. |
 | `/docs/GUIA_DE_USO.md` | Passo a passo completo de instalação e uso. |
 | `/docs/COMPATIBILIDADE_E_LIMITACOES.md` | Resumo técnico das restrições, formatos e compatibilidade. |
 | `/samples/Gfolder.pbix` | Arquivo de teste do Power BI. |

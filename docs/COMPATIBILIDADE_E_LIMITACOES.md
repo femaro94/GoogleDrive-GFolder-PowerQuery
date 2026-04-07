@@ -20,8 +20,8 @@ O projeto possui duas versões finais da função, cada uma voltada para um ambi
 
 | Arquivo | Ambiente recomendado | Observação principal |
 |---|---|---|
-| `04-Fn Gdrive(Fernando-IA)V3.txt` | **Power BI Desktop** | Inclui suporte a arquivos `.parquet`. |
-| `04-Fn Gdrive(Fernando-IA)V3-Excel.txt` | **Excel / Power Query do Excel** | Não processa `.parquet`, para preservar compatibilidade. |
+| `FnGdrive(Fernando)V3.txt` | **Power BI Desktop** | Inclui suporte a arquivos `.parquet`. |
+| `FnGdrive(Fernando)V3-Excel.txt` | **Excel / Power Query do Excel** | Não processa `.parquet`, para preservar compatibilidade. |
 
 A diferença entre as duas não é de qualidade, e sim de **compatibilidade de runtime**. A versão do Excel foi ajustada para funcionar melhor no ambiente em que `Parquet.Document(...)` pode não estar disponível.
 
