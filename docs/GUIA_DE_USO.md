@@ -74,7 +74,7 @@ Com a consulta selecionada, clique em **Exibição** e depois em **Editor Avanç
 Apague o conteúdo padrão e cole integralmente o código da função do arquivo:
 
 ```text
-04-FnGdrive(Fernando)V3.txt
+FnGdrive(Fernando)V3.txt
 ```
 
 Depois clique em **Concluído**.
@@ -199,7 +199,7 @@ Com a consulta selecionada, vá em **Exibição** e abra o **Editor Avançado**.
 Remova o conteúdo padrão e cole o código integral do arquivo:
 
 ```text
-04-FnGdrive(Fernando)V3-Excel.txt
+FnGdrive(Fernando)V3-Excel.txt
 ```
 
 Clique em **Concluído**.
@@ -255,8 +255,8 @@ A diferença operacional entre os dois ambientes é pequena, mas a escolha da fu
 
 | Ambiente | Função correta | Observação |
 |---|---|---|
-| Power BI Desktop | `04-FnGdrive(Fernando)V3.txt` | Suporta `.parquet`. |
-| Excel | `04-FnGdrive(Fernando)V3-Excel.txt` | Não suporta `.parquet`. |
+| Power BI Desktop | `FnGdrive(Fernando)V3.txt` | Suporta `.parquet`. |
+| Excel | `FnGdrive(Fernando)V3-Excel.txt` | Não suporta `.parquet`. |
 
 Se você usar a função do Power BI no Excel, corre o risco de encontrar incompatibilidade por causa de `Parquet.Document(...)`.
 
@@ -331,7 +331,7 @@ A presença das colunas `Status` e `Erro` ajuda bastante no diagnóstico. Quando
 | Nenhum arquivo retornado | Pasta não pública ou HTML diferente do esperado | Verifique o compartilhamento da pasta e teste a URL no navegador anônimo. |
 | Erro ao baixar arquivo | Link gerado inacessível ou item indisponível | Confirme se o arquivo ainda existe e se a pasta continua pública. |
 | `Status = Erro` em um arquivo específico | Formato inválido, arquivo corrompido ou falha do leitor correspondente | Analise a coluna `Erro` e teste o arquivo manualmente. |
-| Falha no Excel com Parquet | Uso da função errada | Troque para `04-FnGdrive(Fernando)V3-Excel.txt`. |
+| Falha no Excel com Parquet | Uso da função errada | Troque para `FnGdrive(Fernando)V3-Excel.txt`. |
 | Falha de credencial | Método de autenticação incorreto | Reconfigure a fonte como **Anônimo**. |
 
 ## 🌟 Boas práticas de uso

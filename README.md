@@ -237,8 +237,10 @@ Se você quiser instalar a solução agora, siga o [**GUIA_DE_USO.md**](./docs/G
 
 ## Referências
 
-[1] [Configure scheduled refresh - Power BI | Microsoft Learn](https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-scheduled-refresh)
+1. Microsoft Learn — [Configure scheduled refresh - Power BI][1]
+2. Microsoft Learn — [Troubleshooting unsupported data source for refresh - Power BI][2]
+3. Microsoft Learn — [Data refresh in Power BI - Refresh and dynamic data sources][3]
 
-[2] [Troubleshooting unsupported data source for refresh - Power BI | Microsoft Learn](https://learn.microsoft.com/en-us/power-bi/connect-data/service-admin-troubleshoot-unsupported-data-source-for-refresh)
-
-[3] [Data refresh in Power BI - Refresh and dynamic data sources | Microsoft Learn](https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data#refresh-and-dynamic-data-sources)
+[1]: https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-scheduled-refresh
+[2]: https://learn.microsoft.com/en-us/power-bi/connect-data/service-admin-troubleshoot-unsupported-data-source-for-refresh
+[3]: https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data#refresh-and-dynamic-data-sources
