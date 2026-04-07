@@ -127,8 +127,10 @@ Esse desenho melhora muito o uso da função em cenários reais, porque permite 
 
 ## Referências
 
-[1] [Data refresh in Power BI - Refresh and dynamic data sources | Microsoft Learn](https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data#refresh-and-dynamic-data-sources)
+1. Microsoft Learn — [Data refresh in Power BI - Refresh and dynamic data sources][1]
+2. Microsoft Learn — [Troubleshooting unsupported data source for refresh - Power BI][2]
+3. Microsoft Learn — [Configure scheduled refresh - Power BI][3]
 
-[2] [Troubleshooting unsupported data source for refresh - Power BI | Microsoft Learn](https://learn.microsoft.com/en-us/power-bi/connect-data/service-admin-troubleshoot-unsupported-data-source-for-refresh)
-
-[3] [Configure scheduled refresh - Power BI | Microsoft Learn](https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-scheduled-refresh)
+[1]: https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-data#refresh-and-dynamic-data-sources
+[2]: https://learn.microsoft.com/en-us/power-bi/connect-data/service-admin-troubleshoot-unsupported-data-source-for-refresh
+[3]: https://learn.microsoft.com/en-us/power-bi/connect-data/refresh-scheduled-refresh
